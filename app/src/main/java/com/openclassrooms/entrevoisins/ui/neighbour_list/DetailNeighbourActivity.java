@@ -1,20 +1,28 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+
+import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,14 +43,15 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     ImageView mDetailAvatar;
     @BindView(R.id.detail_favorite)
     ImageButton mFavoriteButton;
-    @BindView(R.id.detail_return)
-    ImageButton mReturnButton;
+
+
 
 
     public static final String BUNDLE_FAVORITE="BUNDLE_FAVORITE";
     public static final String BUNDLE_POSITION="BUNDLE_POSITION";
     public static final String BUNDLE_STATE_FAVORITE="BUNDLE_STATE_FAVORITE";
     private boolean mIsFavorite;
+    private Neighbour mNeighbour;
 
 
     @Override
@@ -51,16 +60,20 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
 
-        mDetailAvatarName.setText((String) getIntent().getStringExtra("EXTRA_NAME"));
-        mDetailName.setText((String) getIntent().getStringExtra("EXTRA_NAME"));
-        mDetailPhone.setText((String) getIntent().getStringExtra("EXTRA_PHONE"));
-        mDetailAddress.setText((String) getIntent().getStringExtra("EXTRA_ADDRESS"));
-        mDetailAboutMe.setText((String) getIntent().getStringExtra("EXTRA_ABOUT"));
-        loadImage((String) getIntent().getStringExtra("EXTRA_PHOTO"));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
+
+
+        mNeighbour=(Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
+        mDetailAvatarName.setText(mNeighbour.getName());
+        mDetailName.setText(mNeighbour.getName());
+        mDetailPhone.setText(mNeighbour.getPhoneNumber());
+        mDetailAddress.setText(mNeighbour.getAddress());
+        mDetailAboutMe.setText(mNeighbour.getAboutMe());
+        loadImage(mNeighbour.getAvatarUrl());
 
         if(savedInstanceState!=null){
             mIsFavorite=savedInstanceState.getBoolean(BUNDLE_STATE_FAVORITE);
-        }else  mIsFavorite=(boolean) getIntent().getBooleanExtra("EXTRA_FAVORITE", false);
+        }else  mIsFavorite=mNeighbour.isFavorite();
 
         if (mIsFavorite) {
             //if is favorite
@@ -84,16 +97,23 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
             }
         });
-        mReturnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra(BUNDLE_FAVORITE,mIsFavorite);
-                intent.putExtra(BUNDLE_POSITION,(long) getIntent().getLongExtra("EXTRA_ID",-1));
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(BUNDLE_FAVORITE,mIsFavorite);
+        intent.putExtra(BUNDLE_POSITION,mNeighbour.getId());
+        setResult(RESULT_OK, intent);
+
+        super.onBackPressed();
     }
 
     @Override
@@ -110,7 +130,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     public void loadImage(String url)
     {
-        Glide.with(getBaseContext()).load(url).into(mDetailAvatar);
+        Glide.with(getBaseContext()).load(url).apply(RequestOptions.centerCropTransform()).into(mDetailAvatar);
     }
 
 }
