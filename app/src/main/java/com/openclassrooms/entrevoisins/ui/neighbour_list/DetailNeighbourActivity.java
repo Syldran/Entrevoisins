@@ -110,7 +110,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra(BUNDLE_FAVORITE,mIsFavorite);
-        intent.putExtra(BUNDLE_POSITION,mNeighbour.getId());
+        intent.putExtra(BUNDLE_POSITION,getIntent().getIntExtra("NEIGHBOUR_POSITION",-1) );
         setResult(RESULT_OK, intent);
 
         super.onBackPressed();

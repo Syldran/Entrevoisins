@@ -41,10 +41,10 @@ public class NeighbourFragment extends Fragment {
     private List<Neighbour> mNeighbours;
     private List<Neighbour> mFavorites;
     private RecyclerView mRecyclerView;
+    private static final String NEIGHBOUR_POSITION="NEIGHBOUR_POSITION";
     private static final int REQUEST_CODE_DETAIL = 7;
     private static final String EXTRA_NEIGHBOUR = "EXTRA_NEIGHBOUR";
-    private static final String TAB_POSITION = "position";
-    private static final String BUNDLE_POS = "pos";
+    private static final String TAB_POSITION = "TAB_POSITION";
 
 
     /**
@@ -124,7 +124,11 @@ public class NeighbourFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Intent intent = new Intent(getActivity(), DetailNeighbourActivity.class);
-                        intent.putExtra(EXTRA_NEIGHBOUR,mApiService.getNeighbours().get(position));
+                        if(getArguments().getInt(TAB_POSITION)==1)
+                            intent.putExtra(EXTRA_NEIGHBOUR,mFavorites.get(position));
+                        else
+                            intent.putExtra(EXTRA_NEIGHBOUR,mNeighbours.get(position));
+                        intent.putExtra(NEIGHBOUR_POSITION,position);
                         //DetailNeighbourActivity.navigate(getActivity());
                         startActivityForResult(intent,REQUEST_CODE_DETAIL);
                     }
@@ -136,10 +140,13 @@ public class NeighbourFragment extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE_DETAIL == requestCode && RESULT_OK == resultCode) {
+            initList();
             boolean favorite=data.getBooleanExtra(DetailNeighbourActivity.BUNDLE_FAVORITE,false);
-            int pos = ((int) data.getLongExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1))-1;
-            mApiService.getNeighbours().get(pos).setFavorite(favorite);
-
+            int pos = data.getIntExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1);//pas bon !
+            if(getArguments().getInt(TAB_POSITION)==1)
+                mFavorites.get(pos).setFavorite(favorite);
+            else
+                mNeighbours.get(pos).setFavorite(favorite);
         }
     }
 
