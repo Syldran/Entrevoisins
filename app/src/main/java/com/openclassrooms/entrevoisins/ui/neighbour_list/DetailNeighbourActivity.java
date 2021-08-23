@@ -1,16 +1,12 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,8 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-
-import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +45,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     public static final String BUNDLE_POSITION="BUNDLE_POSITION";
     public static final String BUNDLE_STATE_FAVORITE="BUNDLE_STATE_FAVORITE";
     private boolean mIsFavorite;
-    private Neighbour mNeighbour;
 
 
     @Override
@@ -60,10 +53,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
-
-
-        mNeighbour=(Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
+        Neighbour mNeighbour=(Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
         mDetailAvatarName.setText(mNeighbour.getName());
         mDetailName.setText(mNeighbour.getName());
         mDetailPhone.setText(mNeighbour.getPhoneNumber());

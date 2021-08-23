@@ -14,8 +14,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.neighbour_list.DetailNeighbourActivity"
-            android:label="Detail neighbour"
-
+            android:label=""
+            android:theme="@style/AppThemeTransparentBar"
             android:exported="true"
             android:parentActivityName="com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity" />
         <activity

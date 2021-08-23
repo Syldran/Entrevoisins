@@ -9,6 +9,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 
+import java.util.Objects;
+
 public class RecyclerViewItemCountAssertion implements ViewAssertion {
         private final Matcher<Integer> matcher;
 
@@ -32,6 +34,6 @@ public class RecyclerViewItemCountAssertion implements ViewAssertion {
 
             RecyclerView recyclerView = (RecyclerView) view;
             RecyclerView.Adapter adapter = recyclerView.getAdapter();
-            Assert.assertThat(adapter.getItemCount(), matcher);
+            Assert.assertThat(Objects.requireNonNull(adapter).getItemCount(), matcher);
         }
     }

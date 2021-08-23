@@ -1,24 +1,18 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
@@ -33,6 +27,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class NeighbourFragment extends Fragment {
@@ -72,7 +67,7 @@ public class NeighbourFragment extends Fragment {
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
         configureOnClickRecyclerView();
         return view;
     }
@@ -83,16 +78,12 @@ public class NeighbourFragment extends Fragment {
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
         mFavorites = new ArrayList<Neighbour>(0);
-        if(getArguments().getInt(TAB_POSITION)==1)
+        if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
         {
-            for (int i = 0; i < mApiService.getNeighbours().size(); i++) {
-                if (mApiService.getNeighbours().get(i).isFavorite()) {
-                    mFavorites.add(mApiService.getNeighbours().get(i));
-                }
-            }
-
+            mFavorites=mApiService.getFavoriteNeighbours();
             mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavorites));
-        }else {
+        }
+        else {
             mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
         }
 
@@ -124,7 +115,7 @@ public class NeighbourFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Intent intent = new Intent(getActivity(), DetailNeighbourActivity.class);
-                        if(getArguments().getInt(TAB_POSITION)==1)
+                        if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
                             intent.putExtra(EXTRA_NEIGHBOUR,mFavorites.get(position));
                         else
                             intent.putExtra(EXTRA_NEIGHBOUR,mNeighbours.get(position));
@@ -141,12 +132,12 @@ public class NeighbourFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE_DETAIL == requestCode && RESULT_OK == resultCode) {
             initList();
-            boolean favorite=data.getBooleanExtra(DetailNeighbourActivity.BUNDLE_FAVORITE,false);
-            int pos = data.getIntExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1);//pas bon !
-            if(getArguments().getInt(TAB_POSITION)==1)
-                mFavorites.get(pos).setFavorite(favorite);
+            boolean favorite= Objects.requireNonNull(data).getBooleanExtra(DetailNeighbourActivity.BUNDLE_FAVORITE,false);
+            int pos = data.getIntExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1);
+            if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
+                mApiService.putOrRemoveUserFromFavorite(mApiService.getFavoriteNeighbours().get(pos),favorite);
             else
-                mNeighbours.get(pos).setFavorite(favorite);
+                mApiService.putOrRemoveUserFromFavorite(mApiService.getNeighbours().get(pos), favorite);
         }
     }
 
