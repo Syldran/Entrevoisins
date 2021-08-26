@@ -36,7 +36,8 @@ public interface NeighbourApiService {
 
     /**
      * Put or Remove from favorite
-     * @param neighbour  }
+     * @param favorite
+     * @param neighbour }
      */
     void putOrRemoveUserFromFavorite(Neighbour neighbour, boolean favorite);
 }

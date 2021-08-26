@@ -29,6 +29,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     TextView mDetailAvatarName;
     @BindView(R.id.detail_phone)
     TextView mDetailPhone;
+    @BindView(R.id.detail_website)
+    TextView mDetailWebsite;
     @BindView(R.id.detail_address)
     TextView mDetailAddress;
     @BindView(R.id.detail_aboutme)
@@ -59,6 +61,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         mDetailPhone.setText(mNeighbour.getPhoneNumber());
         mDetailAddress.setText(mNeighbour.getAddress());
         mDetailAboutMe.setText(mNeighbour.getAboutMe());
+        mDetailWebsite.append(mNeighbour.getName().toLowerCase());
         loadImage(mNeighbour.getAvatarUrl());
 
         if(savedInstanceState!=null){
@@ -81,10 +84,9 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                     mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_border_white_24dp));
                     mIsFavorite=false;
                 }else{
-                   mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
-                   mIsFavorite=true;
+                    mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
+                    mIsFavorite=true;
                 }
-
             }
         });
 
