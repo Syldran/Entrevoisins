@@ -55,6 +55,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
 
+        //We use neighbour data to feed app interface views.
         Neighbour mNeighbour=(Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
         mDetailAvatarName.setText(mNeighbour.getName());
         mDetailName.setText(mNeighbour.getName());
@@ -69,11 +70,11 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         }else  mIsFavorite=mNeighbour.isFavorite();
 
         if (mIsFavorite) {
-            //if is favorite
+            //if is favorite solid star
             mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
         }
         else {
-            //if is not favorite
+            //if not favorite empty star
             mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_border_white_24dp));
         }
 
@@ -81,9 +82,11 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mIsFavorite){
+                    //here you click an already solid star for a favorite neighbour so you set star to empty and favorite status to false
                     mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_border_white_24dp));
                     mIsFavorite=false;
                 }else{
+                    //here you click an empty star so you set it to a solid one and favorite status to true
                     mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
                     mIsFavorite=true;
                 }
@@ -93,6 +96,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     }
 
+    //toolbar button return
     public boolean onOptionsItemSelected(MenuItem item){
         onBackPressed();
         return true;
@@ -100,6 +104,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //sending favorite status back to NeighbourFragment once activity end.
         Intent intent = new Intent();
         intent.putExtra(BUNDLE_FAVORITE,mIsFavorite);
         intent.putExtra(BUNDLE_POSITION,getIntent().getIntExtra("NEIGHBOUR_POSITION",-1) );
@@ -115,10 +120,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     }
 
 
-    public static void navigate(FragmentActivity activity) {
-        Intent intent = new Intent(activity, DetailNeighbourActivity.class);
-        ActivityCompat.startActivity(activity, intent, null);
-    }
 
     public void loadImage(String url)
     {

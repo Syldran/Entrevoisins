@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#0287c3</color>
     <color name="colorAccent">#FF80AB</color>
     <color name="transparent">#00000000</color>
+    <color name="colorBackground">#CCCCCC</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGold">#ffd700</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDimWhite">#FFFFFF</color>
+
+
 </resources>

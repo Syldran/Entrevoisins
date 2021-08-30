@@ -116,8 +116,10 @@ public class NeighbourFragment extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Intent intent = new Intent(getActivity(), DetailNeighbourActivity.class);
                         if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
+                            //if on tab favorite send favorite data
                             intent.putExtra(EXTRA_NEIGHBOUR,mFavorites.get(position));
                         else
+                            // if tab neighbours send neighbour data
                             intent.putExtra(EXTRA_NEIGHBOUR,mNeighbours.get(position));
                         intent.putExtra(NEIGHBOUR_POSITION,position);
 
@@ -135,8 +137,10 @@ public class NeighbourFragment extends Fragment {
             boolean favorite= Objects.requireNonNull(data).getBooleanExtra(DetailNeighbourActivity.BUNDLE_FAVORITE,false);
             int pos = data.getIntExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1);
             if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
+                //on tab favorite remove favorite status at position.
                 mApiService.putOrRemoveUserFromFavorite(mApiService.getFavoriteNeighbours().get(pos),favorite);
             else
+                //on tab neighbours add or remove favorite status at position.
                 mApiService.putOrRemoveUserFromFavorite(mApiService.getNeighbours().get(pos), favorite);
         }
     }
@@ -148,7 +152,6 @@ public class NeighbourFragment extends Fragment {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
-
         initList();
     }
 }
