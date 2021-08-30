@@ -86,12 +86,10 @@ public class NeighbourFragment extends Fragment {
         else {
             mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
         }
-
     }
 
     @Override
     public void onResume() {
-
         super.onResume();
         initList();
     }

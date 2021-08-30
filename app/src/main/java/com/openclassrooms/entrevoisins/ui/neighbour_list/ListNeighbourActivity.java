@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.databinding.ActivityListNeighbourBinding;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
