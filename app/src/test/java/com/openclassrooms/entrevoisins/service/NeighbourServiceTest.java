@@ -30,6 +30,7 @@ public class NeighbourServiceTest {
 
     @Test
     public void getNeighboursWithSuccess() {
+        //Check that getNeighbours() really return our data from DUMMY_NEIGHBOURS
         List<Neighbour> neighbours = service.getNeighbours();
         List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
@@ -37,6 +38,7 @@ public class NeighbourServiceTest {
 
     @Test
     public void deleteNeighbourWithSuccess() {
+        //Check the neighbour isn't contained anymore after being deleted
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
@@ -44,6 +46,7 @@ public class NeighbourServiceTest {
 
     @Test
     public void addNeighbourWithSuccess() {
+        //Check the neighbour is contained after being added
         Neighbour neighbourToAdd = new Neighbour(111,"Fabien",null,null,null,null);
         service.createNeighbour(neighbourToAdd);
         assertTrue(service.getNeighbours().contains(neighbourToAdd));
@@ -51,9 +54,11 @@ public class NeighbourServiceTest {
 
     @Test
     public void putOrRemoveNeighbourFavoriteWithSuccess(){
+        //Check neighbour at position 2 is now in favorite list after being put to favorite
         Neighbour neighbour = service.getNeighbours().get(2);
         service.putOrRemoveUserFromFavorite(neighbour,true);
         assertTrue(service.getFavoriteNeighbours().contains(neighbour));
+        //Check neighbours at position 2 is not in favorite list anymore after losing its favorite status
         service.putOrRemoveUserFromFavorite(neighbour, false);
         assertFalse(service.getFavoriteNeighbours().contains(neighbour));
     }

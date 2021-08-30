@@ -36,6 +36,15 @@
         <entry key="..\:/Android/AndroidStudioProjects/Entrevoisins/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22135416666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/activity_list_neighbour.xml" value="0.15051020408163265" />
         <entry key="..\:/Android/AndroidStudioProjects/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/fragment_neighbour.xml" value="0.3632246376811594" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/drawable/button_border_shadow.xml" value="0.1890625" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/drawable/ic_circle_24.xml" value="0.3828125" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/drawable/perm_group_www.xml" value="0.1890625" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/drawable/round.xml" value="0.1890625" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/drawable/shadow.xml" value="0.1890625" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/layout/activity_detail_neighbour.xml" value="0.3104265402843602" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/layout/activity_list_neighbour.xml" value="0.17291666666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/layout/fragment_neighbour.xml" value="0.17291666666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/P3_03_code_projet/app/src/main/res/layout/fragment_neighbour_list.xml" value="0.17291666666666666" />
       </map>
     </option>
   </component>

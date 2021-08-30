@@ -24,9 +24,8 @@ public class ListNeighbourActivity extends AppCompatActivity {
     @BindView(R.id.container)
     ViewPager mViewPager;
 
-    int mTabSelected=0;
+
     ListNeighbourPagerAdapter mPagerAdapter;
-    private static final String SHARED_NEIGHBOURS = "SHARED_NEIGHBOURS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

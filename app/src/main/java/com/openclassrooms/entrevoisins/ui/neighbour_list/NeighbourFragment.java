@@ -120,7 +120,7 @@ public class NeighbourFragment extends Fragment {
                         else
                             intent.putExtra(EXTRA_NEIGHBOUR,mNeighbours.get(position));
                         intent.putExtra(NEIGHBOUR_POSITION,position);
-                        //DetailNeighbourActivity.navigate(getActivity());
+
                         startActivityForResult(intent,REQUEST_CODE_DETAIL);
                     }
                 });
