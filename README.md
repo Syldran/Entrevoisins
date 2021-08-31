@@ -7,11 +7,11 @@
 ***
 Entrevoisins is an application used to link neighbours with each others and check interests or services they wish to share.
 ### Current Functionnalities
-Check neighbours list.
-Check each neighbours details.
-Delete a neighbour.
-Add neighbours.
-Add neighbours to your favorite list
+Check neighbours list.<br/>
+Check each neighbours details.<br/>
+Delete a neighbour.<br/>
+Add neighbours.<br/>
+Add neighbours to your favorite list<br/>
 
 ## Technologies
 ***
