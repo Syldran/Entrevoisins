@@ -12,8 +12,7 @@ Check each neighbours details.
 Delete a neighbour.
 Add neighbours.
 Add neighbours to your favorite list
-### Screenshot
-![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
+
 ## Technologies
 ***
 A list of technologies used within the project:
