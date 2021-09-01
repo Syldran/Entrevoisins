@@ -71,8 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/perm_group_location"
-                        android:tint="@color/colorRed" />
+                        android:src="@drawable/ic_baseline_location_on_24" />
 
                     <TextView
                         android:id="@+id/detail_address"
@@ -91,8 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/perm_group_phone_calls"
-                        android:tint="@color/colorRed" />
+                        android:src="@drawable/ic_baseline_phone_24" />
 
 
                     <TextView
@@ -112,8 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/perm_group_www"
-                        android:tint="@color/colorRed" />
+                        android:src="@drawable/ic_baseline_language_24" />
 
 
                     <TextView
