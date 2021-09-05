@@ -21,7 +21,6 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.utils.ItemClickSupport;
 
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -78,12 +77,10 @@ public class NeighbourFragment extends Fragment {
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
         mFavorites = new ArrayList<Neighbour>(0);
-        if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
-        {
-            mFavorites=mApiService.getFavoriteNeighbours();
+        if (Objects.requireNonNull(getArguments()).getInt(TAB_POSITION) == 1) {
+            mFavorites = mApiService.getFavoriteNeighbours();
             mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavorites));
-        }
-        else {
+        } else {
             mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
         }
     }
@@ -113,12 +110,13 @@ public class NeighbourFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Intent intent = new Intent(getActivity(), DetailNeighbourActivity.class);
-                        if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
+                        if (Objects.requireNonNull(getArguments()).getInt(TAB_POSITION) == 1) {
                             //if on tab favorite send favorite data
-                            intent.putExtra(EXTRA_NEIGHBOUR,mFavorites.get(position));
-                        else
+                            intent.putExtra(EXTRA_NEIGHBOUR, mFavorites.get(position));
+                        } else {
                             // if tab neighbours send neighbour data
-                            intent.putExtra(EXTRA_NEIGHBOUR,mNeighbours.get(position));
+                            intent.putExtra(EXTRA_NEIGHBOUR, mNeighbours.get(position));
+                        }
                         intent.putExtra(NEIGHBOUR_POSITION,position);
 
                         startActivityForResult(intent,REQUEST_CODE_DETAIL);
@@ -134,12 +132,13 @@ public class NeighbourFragment extends Fragment {
             initList();
             boolean favorite= Objects.requireNonNull(data).getBooleanExtra(DetailNeighbourActivity.BUNDLE_FAVORITE,false);
             int pos = data.getIntExtra(DetailNeighbourActivity.BUNDLE_POSITION,-1);
-            if(Objects.requireNonNull(getArguments()).getInt(TAB_POSITION)==1)
+            if (Objects.requireNonNull(getArguments()).getInt(TAB_POSITION) == 1) {
                 //on tab favorite remove favorite status at position.
-                mApiService.putOrRemoveUserFromFavorite(mApiService.getFavoriteNeighbours().get(pos),favorite);
-            else
+                mApiService.putOrRemoveUserFromFavorite(mApiService.getFavoriteNeighbours().get(pos), favorite);
+            } else {
                 //on tab neighbours add or remove favorite status at position.
                 mApiService.putOrRemoveUserFromFavorite(mApiService.getNeighbours().get(pos), favorite);
+            }
         }
     }
 

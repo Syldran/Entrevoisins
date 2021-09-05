@@ -1,12 +1,10 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -41,11 +39,9 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     ImageButton mFavoriteButton;
 
 
-
-
-    public static final String BUNDLE_FAVORITE="BUNDLE_FAVORITE";
-    public static final String BUNDLE_POSITION="BUNDLE_POSITION";
-    public static final String BUNDLE_STATE_FAVORITE="BUNDLE_STATE_FAVORITE";
+    public static final String BUNDLE_FAVORITE = "BUNDLE_FAVORITE";
+    public static final String BUNDLE_POSITION = "BUNDLE_POSITION";
+    public static final String BUNDLE_STATE_FAVORITE = "BUNDLE_STATE_FAVORITE";
     private boolean mIsFavorite;
 
 
@@ -54,9 +50,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
-
         //We use neighbour data to feed app interface views.
-        Neighbour mNeighbour=(Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
+        Neighbour mNeighbour = (Neighbour) getIntent().getSerializableExtra("EXTRA_NEIGHBOUR");
         mDetailAvatarName.setText(mNeighbour.getName());
         mDetailName.setText(mNeighbour.getName());
         mDetailPhone.setText(mNeighbour.getPhoneNumber());
@@ -65,30 +60,30 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         mDetailWebsite.append(mNeighbour.getName().toLowerCase());
         loadImage(mNeighbour.getAvatarUrl());
 
-        if(savedInstanceState!=null){
-            mIsFavorite=savedInstanceState.getBoolean(BUNDLE_STATE_FAVORITE);
-        }else  mIsFavorite=mNeighbour.isFavorite();
-
+        if (savedInstanceState != null) {
+            mIsFavorite = savedInstanceState.getBoolean(BUNDLE_STATE_FAVORITE);
+        } else {
+            mIsFavorite = mNeighbour.isFavorite();
+        }
         if (mIsFavorite) {
             //if is favorite solid star
-            mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
-        }
-        else {
+            mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_white_24dp));
+        } else {
             //if not favorite empty star
-            mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_border_white_24dp));
+            mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border_white_24dp));
         }
 
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mIsFavorite){
+                if (mIsFavorite) {
                     //here you click an already solid star for a favorite neighbour so you set star to empty and favorite status to false
-                    mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_border_white_24dp));
-                    mIsFavorite=false;
-                }else{
+                    mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_border_white_24dp));
+                    mIsFavorite = false;
+                } else {
                     //here you click an empty star so you set it to a solid one and favorite status to true
-                    mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_star_white_24dp));
-                    mIsFavorite=true;
+                    mFavoriteButton.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_star_white_24dp));
+                    mIsFavorite = true;
                 }
             }
         });
@@ -109,7 +104,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         intent.putExtra(BUNDLE_FAVORITE,mIsFavorite);
         intent.putExtra(BUNDLE_POSITION,getIntent().getIntExtra("NEIGHBOUR_POSITION",-1) );
         setResult(RESULT_OK, intent);
-
         super.onBackPressed();
     }
 
